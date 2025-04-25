@@ -77,7 +77,7 @@ const FAQ = () => {
   return (
     <section
       id="faq"
-      className="pt-24 pb-32 bg-[#D1BAFF]"
+      className="min-h-screen pt-24 pb-32 bg-[#D1BAFF]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div>
@@ -92,7 +92,7 @@ const FAQ = () => {
                 <button
                   key={category}
                   onClick={() => setActiveCategory(category)}
-                  className={`text-left text-lg transition-colors duration-300 ${
+                  className={`text-left text-lg cursor-pointer transition-colors duration-300 ${
                     activeCategory === category
                       ? "text-black font-bold"
                       : "text-gray-600 hover:text-black"
@@ -121,7 +121,7 @@ const FAQ = () => {
                   >
                     <button
                       onClick={() => toggleQuestion(item.question)}
-                      className="w-full flex justify-between items-center py-6 text-left focus:outline-none"
+                      className="w-full flex justify-between cursor-pointer items-center py-6 text-left focus:outline-none"
                     >
                       <h3 className="text-xl font-medium text-[#1a1a2e]">
                         {item.question}

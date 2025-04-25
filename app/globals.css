@@ -30,16 +30,43 @@ section {
 
 .ticker-container {
   width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
-.ticker-wrapper {
-  display: inline-block;
-  white-space: nowrap;
-  animation: ticker 60s linear infinite;
+.ticker-track {
+  display: flex;
+  width: fit-content;
+  animation: ticker 30s linear infinite;
 }
 
-.ticker-wrapper:hover {
+.ticker-track:hover {
   animation-play-state: paused;
+}
+
+.ticker-content {
+  display: flex;
+  white-space: nowrap;
+}
+
+.ticker-item {
+  display: inline-block;
+  padding: 0 1rem;
+  text-align: center;
+  font-size: 1rem;
+  color: rgb(55, 65, 81);
+}
+
+@media (min-width: 640px) {
+  .ticker-item {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .ticker-item {
+    font-size: 1rem;
+  }
 }
 
 @keyframes ticker {

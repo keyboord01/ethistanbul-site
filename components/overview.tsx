@@ -50,7 +50,7 @@ const Overview = () => {
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mb-8 sm:mb-12 md:mb-16">
           <button
-            className={`px-6 pb-2 pt-1 rounded-full transition-all text-base sm:text-lg md:text-xl lg:text-2xl w-full sm:w-auto border border-black ${
+            className={`px-6 pb-2 pt-1 rounded-full transition-all text-base sm:text-lg md:text-xl lg:text-2xl w-full sm:w-auto border border-black cursor-pointer ${
               selectedSection === "Conference"
                 ? "bg-purple-500 text-white"
                 : "bg-white text-gray-800 hover:bg-[#D1BAFF]"
@@ -60,7 +60,7 @@ const Overview = () => {
             Conference
           </button>
           <button
-            className={`px-6 pb-2 pt-1 rounded-full transition-all text-base sm:text-lg md:text-xl lg:text-2xl w-full sm:w-auto border border-black ${
+            className={`px-6 pb-2 pt-1 rounded-full transition-all text-base sm:text-lg md:text-xl lg:text-2xl w-full sm:w-auto border border-black cursor-pointer ${
               selectedSection === "Hackathon"
                 ? "bg-purple-500 text-white"
                 : "bg-white text-gray-800 hover:bg-[#D1BAFF]"
@@ -155,23 +155,29 @@ const Overview = () => {
       </div>
 
       <div className="w-full mt-10 sm:mt-16 md:mt-20 py-2 overflow-hidden bg-[#c0fab2]">
-        <div className="ticker-container relative overflow-hidden">
-          <div className="ticker-wrapper whitespace-nowrap">
-            {[...Array(2)].map((_, containerIndex) => (
-              <div
-                key={containerIndex}
-                className="ticker-content inline-block"
-              >
-                {techKeywords.map((keyword, index) => (
-                  <span
-                    key={`${containerIndex}-${index}`}
-                    className="inline-block mx-2 text-lg sm:text-xl md:text-base text-gray-700"
-                  >
-                    {keyword}
-                  </span>
-                ))}
-              </div>
-            ))}
+        <div className="ticker-container">
+          <div className="ticker-track">
+            <div className="ticker-content">
+              {techKeywords.map((keyword, index) => (
+                <span
+                  key={`original-${index}`}
+                  className="ticker-item"
+                >
+                  {keyword}
+                </span>
+              ))}
+            </div>
+
+            <div className="ticker-content">
+              {techKeywords.map((keyword, index) => (
+                <span
+                  key={`duplicate-${index}`}
+                  className="ticker-item"
+                >
+                  {keyword}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

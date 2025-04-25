@@ -1,9 +1,22 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Navbar from "./ui/nav-bar";
 import IstanbulBackground from "@/assets/istanbul-background.png";
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > window.innerHeight * 0.7);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section className="relative h-screen w-full overflow-hidden">
       <div className="absolute inset-0">
@@ -17,21 +30,35 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-blue-500/30 to-purple-500/30 mix-blend-multiply" />
       </div>
 
-      <div className="fixed top-6 right-6 z-20">
-        <button className="bg-white text-gray-800 border-1 border-black hover:bg-gray-100 px-5 pb-2 pt-1 rounded-full font-medium text-lg">
+      <motion.div
+        className="fixed right-6 z-20"
+        initial={{ y: 24, opacity: 0 }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          top: isScrolled ? "auto" : 24,
+          bottom: isScrolled ? 24 : "auto",
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 120,
+          damping: 20,
+        }}
+      >
+        <button className="bg-white text-gray-800 border border-black hover:bg-gray-100 px-5 pb-2 pt-1 rounded-full font-medium text-lg cursor-pointer">
           Interested in partnering?
         </button>
-      </div>
+      </motion.div>
 
       <div className="relative z-10 flex flex-col h-full justify-center items-center text-white px-4 mt-[-8vh]">
         <p className="text-xl mb-2">September 5-6-7, 2025</p>
         <h1 className="text-6xl md:text-8xl font-bold mb-8">ETHISTANBUL</h1>
 
         <div className="flex flex-col sm:flex-row gap-4 text-gray-800">
-          <button className="bg-white hover:bg-gray-200 px-8 pb-2 pt-1 rounded-full font-medium transition-all">
+          <button className="bg-white hover:bg-gray-200 px-8 pb-2 pt-1 rounded-full font-medium transition-all cursor-pointer">
             Get Your Tickets
           </button>
-          <button className="bg-white hover:bg-gray-200 px-8 pb-2 pt-1 rounded-full font-medium transition-all">
+          <button className="bg-white hover:bg-gray-200 px-8 pb-2 pt-1 rounded-full font-medium transition-all cursor-pointer">
             Apply To Hack
           </button>
         </div>
