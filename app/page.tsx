@@ -1,3 +1,4 @@
+import FAQ from "@/components/FAQ";
 import HeroSection from "@/components/hero-section";
 import Overview from "@/components/overview";
 import React from "react";
@@ -7,6 +8,7 @@ export default function Home() {
     <main className="relative">
       <HeroSection />
       <Overview />
+      <FAQ />
     </main>
   );
 }

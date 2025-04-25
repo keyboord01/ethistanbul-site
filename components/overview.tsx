@@ -32,19 +32,17 @@ const Overview = () => {
   };
 
   return (
-    <section className="pt-10 sm:pt-16 md:pt-20 overflow-hidden ">
-      <div className="absolute bottom-12 right-6 z-20">
-        <button className="bg-white text-gray-800 border-1 border-black hover:bg-gray-100 px-5 py-2 rounded-full font-medium text-sm">
-          Interested in partnering?
-        </button>
-      </div>
+    <section
+      className="pt-10 sm:pt-16 md:pt-20 overflow-hidden"
+      id="overview"
+    >
       <div className="max-w-7xl container mx-auto px-4 sm:px-6">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-[110px] mb-4 font-bold">
             BUILD YOUR OWN <br />
             <span className="text-[#9F62FF]">{` "NEW ROME"`}</span> IN TECH
           </h2>
-          <p className="text-sm sm:text-base max-w-2xl mx-auto">
+          <p className="text-xl max-w-2xl mx-auto">
             Lorem Ipsum has been the industrys standard dummy text ever since
             the 1500s.
           </p>

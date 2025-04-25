@@ -23,6 +23,10 @@ body {
   font-family: "Darker_Grotesque", Arial, Helvetica, sans-serif;
 }
 
+section {
+  scroll-margin-top: 100px;
+}
+
 .ticker-container {
   width: 100%;
 }
