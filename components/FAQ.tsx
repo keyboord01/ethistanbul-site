@@ -77,7 +77,7 @@ const FAQ = () => {
   return (
     <section
       id="faq"
-      className="h-screen pt-24 pb-32 bg-[#D1BAFF]"
+      className="pt-24 pb-32 bg-[#D1BAFF]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div>

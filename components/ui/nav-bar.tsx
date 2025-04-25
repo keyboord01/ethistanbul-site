@@ -42,6 +42,14 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [isMobileMenuOpen]);
+
   const scrollToSection = (id: string) => {
     const section = document.querySelector(id);
     if (section) {
@@ -121,23 +129,40 @@ const Navbar = () => {
       </nav>
 
       <div
-        className={`fixed inset-0 bg-white text-black z-30 lg:hidden transition-transform duration-500 ease-in-out ${
-          isMobileMenuOpen
-            ? "transform translate-y-0"
-            : "transform translate-y-full"
+        className={`fixed inset-0 bg-white text-black z-50 lg:hidden transition-transform duration-500 ease-in-out ${
+          isMobileMenuOpen ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <div className="container mx-auto py-20 px-6">
-          <div className="flex flex-col space-y-6">
-            {navLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="text-xl font-medium border-b border-gray-100 pb-3 hover:text-purple-600 transition-colors duration-300"
-                onClick={() => setIsMobileMenuOpen(false)}
+        <div className="container mx-auto py-8 px-6 relative h-full">
+          {/* Close button inside mobile menu */}
+          <button
+            className="absolute top-4 right-4 p-2 z-50"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <svg
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          <div className="flex flex-col justify-center h-full pt-12">
+            {navLinks.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => scrollToSection(link.href)}
+                className="text-2xl font-medium py-4 px-4 hover:bg-purple-100 rounded-xl transition-colors duration-300"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </div>
         </div>
