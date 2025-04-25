@@ -3,9 +3,10 @@ import { Darker_Grotesque } from "next/font/google";
 import "./globals.css";
 
 const darker_grotesque = Darker_Grotesque({
-  variable: "--font-Darker_Grotesque",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-darker-grotesque",
+  display: "swap",
   preload: true,
 });
 
@@ -21,8 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${darker_grotesque.variable}`}>
+    <html
+      lang="en"
+      className={`${darker_grotesque.variable}`}
+    >
+      <body>
         <main className="relative z-10">{children}</main>
       </body>
     </html>

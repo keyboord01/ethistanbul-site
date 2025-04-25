@@ -18,7 +18,7 @@ const HeroSection = () => {
       </div>
 
       <div className="absolute top-6 right-6 z-20">
-        <button className="bg-white text-gray-800 hover:bg-gray-100 px-5 py-2 rounded-full font-medium text-sm transition-all shadow-md">
+        <button className="bg-white text-gray-800 border-1 border-black hover:bg-gray-100 px-5 py-2 rounded-full font-medium text-sm">
           Interested in partnering?
         </button>
       </div>
