@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/ui/nav-bar";
+
 type Category =
   | "General Info"
   | "Getting to Istanbul"
@@ -20,6 +20,16 @@ interface SectionContent {
 const IstanbulGuidePage = () => {
   const [activeCategory, setActiveCategory] =
     useState<Category>("General Info");
+  const contentRefs = useRef<Record<Category, HTMLDivElement | null>>({
+    "General Info": null,
+    "Getting to Istanbul": null,
+    "Where to Stay": null,
+    "History, Culture & Food": null,
+    "Tips from Locals": null,
+    Transportation: null,
+    Safety: null,
+  });
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const categories: Category[] = [
     "General Info",
@@ -58,56 +68,56 @@ const IstanbulGuidePage = () => {
       {
         title: "Quick Tips",
         content: (
-          <div className="bg-purple-100 rounded-3xl py-4 px-2">
-            <h3 className="text-2xl font-medium text-[#1a1a2e] mb-3 px-4">
+          <div className="rounded-3xl py-4">
+            <h3 className="text-2xl font-medium text-[#1a1a2e] mb-3 ">
               Quick Tips
             </h3>
             <div className="space-y-2">
-              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+              <div className="bg-white rounded-full border-1 border-black px-6 py-4 flex justify-between items-center">
                 <div className="flex items-center">
                   <p className="font-medium">Timezone:</p>
                   <p className="ml-2">GMT +3</p>
                 </div>
-                <p className="text-gray-500">Current Time</p>
+                <p className="text-black">Current Time</p>
               </div>
 
-              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+              <div className="bg-white rounded-full border-1 border-black px-6 py-4 flex justify-between items-center">
                 <div className="flex items-center">
                   <p className="font-medium">Visa:</p>
                   <p className="ml-2">Tourist Visa (30/90 Days) & E-Visa</p>
                 </div>
-                <p className="text-gray-500">Requirements</p>
+                <p className="text-black">Requirements</p>
               </div>
 
-              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+              <div className="bg-white rounded-full border-1 border-black px-6 py-4 flex justify-between items-center">
                 <div className="flex items-center">
                   <p className="font-medium">Currency:</p>
                   <p className="ml-2">Turkish Lira</p>
                 </div>
-                <p className="text-gray-500">Current Time</p>
+                <p className="text-black">Current Time</p>
               </div>
 
-              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+              <div className="bg-white rounded-full border-1 border-black px-6 py-4 flex justify-between items-center">
                 <div className="flex items-center">
                   <p className="font-medium">Currency:</p>
                   <p className="ml-2">Turkish Lira</p>
                 </div>
-                <p className="text-gray-500">Exchange Rate</p>
+                <p className="text-black">Exchange Rate</p>
               </div>
 
-              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+              <div className="bg-white rounded-full border-1 border-black px-6 py-4 flex justify-between items-center">
                 <div className="flex items-center">
                   <p className="font-medium">Official Language:</p>
                   <p className="ml-2">Turkish</p>
                 </div>
               </div>
 
-              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+              <div className="bg-white rounded-full border-1 border-black px-6 py-4 flex justify-between items-center">
                 <div className="flex items-center">
                   <p className="font-medium">Weather:</p>
                   <p className="ml-2">There are four climates</p>
                 </div>
-                <p className="text-gray-500">Weather Report</p>
+                <p className="text-black">Weather Report</p>
               </div>
             </div>
           </div>
@@ -117,14 +127,14 @@ const IstanbulGuidePage = () => {
     "Getting to Istanbul": [
       {
         content: (
-          <div className="bg-purple-100 rounded-3xl py-4 px-4">
+          <div className="rounded-3xl py-4">
             <h3 className="text-2xl font-medium text-[#1a1a2e] mb-4">
               Getting to Istanbul
             </h3>
 
             <div className="mb-6">
               <p className="mb-2 font-medium">Visa Requirements:</p>
-              <p className="text-gray-700">
+              <p className="">
                 Get your visa before you start your trip. Fortunately, Türkiye
                 offers visa-free visits to citizens of many countries. Find out
                 if you need a Visa by clicking{" "}
@@ -164,7 +174,7 @@ const IstanbulGuidePage = () => {
     "Where to Stay": [
       {
         content: (
-          <div className="bg-purple-100 rounded-3xl py-4 px-4">
+          <div className="rounded-3xl py-4">
             <h3 className="text-2xl font-medium text-[#1a1a2e] mb-4">
               Where to Stay
             </h3>
@@ -219,6 +229,9 @@ const IstanbulGuidePage = () => {
       {
         content: (
           <>
+            <h3 className="text-2xl font-medium text-[#1a1a2e] mb-4">
+              History, Culture & Food
+            </h3>
             <p className="mb-4">
               Istanbul does not only stand out because it is the only city
               established on two continents. As a corner where many
@@ -258,6 +271,9 @@ const IstanbulGuidePage = () => {
       {
         content: (
           <>
+            <h3 className="text-2xl font-medium text-[#1a1a2e] mb-4">
+              Tips from Locals
+            </h3>
             <div className="mb-6">
               <p className="font-bold mb-2">Currency & Payment</p>
               <ul className="list-disc pl-5">
@@ -277,9 +293,8 @@ const IstanbulGuidePage = () => {
               <ul className="list-disc pl-5">
                 <li>E-SIM providers: You can use Holafly or Airalo</li>
                 <li>
-                  {`                  SIM cards with best 4G coverage: Turkcell, Türk Telekom and
-                  Vodafone are Turkey's largest service providers
-`}
+                  {`SIM cards with best 4G coverage: Turkcell, Türk Telekom and
+                  Vodafone are Turkey's largest service providers`}
                 </li>
               </ul>
             </div>
@@ -325,6 +340,9 @@ const IstanbulGuidePage = () => {
       {
         content: (
           <>
+            <h3 className="text-2xl font-medium text-[#1a1a2e] mb-4">
+              Transportation
+            </h3>
             <p className="mb-4">
               {`Istanbul's public transport possibilities are varied and the
               departure times are arranged quite frequently. As a cheap and
@@ -341,7 +359,7 @@ const IstanbulGuidePage = () => {
               <li>
                 <span className="font-medium">Metro:</span>{" "}
                 {`"M" is the sign of
-                    metro Istanbul. By using the lines connecting various points of
+                    metro Istanbul. By using the lines connecting various points of 
                     the city, you can reach your desired destination in the fastest
                     and most comfortable way.`}
               </li>
@@ -401,6 +419,7 @@ const IstanbulGuidePage = () => {
       {
         content: (
           <>
+            <h3 className="text-2xl font-medium text-[#1a1a2e] mb-4">Safety</h3>
             <p className="mb-4">
               It is a safe city in general. However, it should not be forgotten
               that Istanbul is a very large and global city with a population of
@@ -443,17 +462,53 @@ const IstanbulGuidePage = () => {
     ],
   };
 
-  const contentVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+  const handleCategoryClick = (category: Category) => {
+    setActiveCategory(category);
+    if (contentRefs.current[category]) {
+      contentRefs.current[category]?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const category = entry.target.getAttribute(
+              "data-category"
+            ) as Category;
+            if (category) {
+              setActiveCategory(category);
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        root: scrollContainerRef.current,
+      }
+    );
+
+    Object.entries(contentRefs.current).forEach(([, ref]) => {
+      if (ref) {
+        observer.observe(ref);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <>
       <Navbar position="top" />
       <section
         id="istanbul-guide"
-        className="min-h-screen pt-44 pb-32 bg-[#D1BAFF]"
+        className="min-h-screen pt-44 bg-[#D1BAFF]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div>
@@ -463,11 +518,11 @@ const IstanbulGuidePage = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
             <div className="md:col-span-3">
-              <div className="flex flex-col space-y-6">
+              <div className="flex flex-col space-y-6 md:sticky md:top-24">
                 {categories.map((category) => (
                   <button
                     key={category}
-                    onClick={() => setActiveCategory(category)}
+                    onClick={() => handleCategoryClick(category)}
                     className={`text-left text-lg cursor-pointer transition-colors duration-300 ${
                       activeCategory === category
                         ? "text-black font-bold"
@@ -480,31 +535,37 @@ const IstanbulGuidePage = () => {
               </div>
             </div>
 
-            <div className="md:col-span-9">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeCategory}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  variants={contentVariants}
-                  className="space-y-8"
-                >
-                  {contentData[activeCategory].map((section, index) => (
-                    <div
-                      key={index}
-                      className="mb-6"
-                    >
-                      {section.title && activeCategory !== "General Info" && (
-                        <h3 className="text-2xl font-medium text-[#1a1a2e] mb-3">
-                          {section.title}
-                        </h3>
-                      )}
-                      <div className="text-gray-800">{section.content}</div>
-                    </div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
+            <div
+              className="md:col-span-9 noscrollbar"
+              ref={scrollContainerRef}
+              style={{
+                maxHeight: "72vh",
+                overflowY: "auto",
+                scrollBehavior: "smooth",
+              }}
+            >
+              <div className="space-y-32">
+                {" "}
+                {categories.map((category) => (
+                  <div
+                    key={category}
+                    ref={(el) => {
+                      contentRefs.current[category] = el;
+                    }}
+                    data-category={category}
+                    className="mb-16"
+                  >
+                    {contentData[category].map((section, index) => (
+                      <div
+                        key={index}
+                        className="mb-6"
+                      >
+                        {section.content}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
