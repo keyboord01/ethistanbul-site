@@ -4,7 +4,7 @@ import Image from "next/image";
 import TextLogo from "@/assets/text-logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Navbar = () => {
+const Navbar = ({ position }: { position?: string }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -52,32 +52,38 @@ const Navbar = () => {
   }, [isMobileMenuOpen]);
 
   const scrollToSection = (id: string) => {
-    const section = document.querySelector(id);
-    if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-      setIsMobileMenuOpen(false);
+    if (window.location.pathname !== "/") {
+      window.location.href = id;
+    } else {
+      const section = document.querySelector(id);
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+        setIsMobileMenuOpen(false);
+      }
     }
   };
 
   const navLinks = [
-    { label: "Overview", href: "#overview" },
-    { label: "Schedule", href: "#schedule" },
-    { label: "HackerKit", href: "#hacker-kit" },
-    { label: "Judges & Speakers", href: "#judges" },
-    { label: "Partners", href: "#partners" },
-    { label: "Venue", href: "#venue" },
-    { label: "Prizes", href: "#prizes" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Overview", href: "/#overview" },
+    { label: "Schedule", href: "/#schedule" },
+    { label: "HackerKit", href: "/#hacker-kit" },
+    { label: "Judges & Speakers", href: "/#judges" },
+    { label: "Partners", href: "/#partners" },
+    { label: "Venue", href: "/#venue" },
+    { label: "Prizes", href: "/#prizes" },
+    { label: "FAQ", href: "/#faq" },
   ];
 
   return (
     <>
       <motion.nav
         className={`w-full flex justify-center px-4 z-40 ${
-          isScrolled ? "fixed top-0 py-2" : "absolute bottom-6"
+          position === "top" || isScrolled
+            ? "fixed top-0 py-2"
+            : "absolute bottom-6"
         }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

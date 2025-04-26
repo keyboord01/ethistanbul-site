@@ -2,157 +2,513 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import Image from "next/image";
+import IstanbulMap from "@/assets/istanbul_map.png";
+import Navbar from "@/components/ui/nav-bar";
 type Category =
-  | "Event Details"
-  | "Participation & Application"
-  | "Costs & Benefits"
-  | "Experience & Networking";
-interface FAQItem {
-  question: string;
-  answer: string;
+  | "General Info"
+  | "Getting to Istanbul"
+  | "Where to Stay"
+  | "History, Culture & Food"
+  | "Tips from Locals"
+  | "Transportation"
+  | "Safety";
+
+interface SectionContent {
+  title?: string;
+  content: string | React.JSX.Element;
 }
 
-const Page = () => {
+const IstanbulGuidePage = () => {
   const [activeCategory, setActiveCategory] =
-    useState<Category>("Event Details");
-  const [activeQuestions, setActiveQuestions] = useState<
-    Record<string, boolean>
-  >({
-    "Who can participate?": true,
-  });
-
-  const toggleQuestion = (question: string) => {
-    setActiveQuestions((prev) => ({ ...prev, [question]: !prev[question] }));
-  };
+    useState<Category>("General Info");
 
   const categories: Category[] = [
-    "Event Details",
-    "Participation & Application",
-    "Costs & Benefits",
-    "Experience & Networking",
+    "General Info",
+    "Getting to Istanbul",
+    "Where to Stay",
+    "History, Culture & Food",
+    "Tips from Locals",
+    "Transportation",
+    "Safety",
   ];
 
-  const questionsData: Record<Category, FAQItem[]> = {
-    "Event Details": [
+  const contentData: Record<Category, SectionContent[]> = {
+    "General Info": [
       {
-        question: "When and where is ETHistanbul taking place?",
-        answer:
-          "Anyone passionate about blockchain! Whether you’re a developer, designer, or just curious about Ethereum, you’re welcome to apply. No prior experience? No problem, you’ll find plenty of support from mentors and fellow hackers.",
+        title: "The Intercontinental City",
+        content: (
+          <>
+            <p className="mb-4">
+              Welcome to Istanbul, the capital of the Roman, Byzantine, and
+              Ottoman Empires, the pearl of the Bosphorus, and the geographical,
+              cultural, and commercial bridge where the East and the West meet.
+            </p>
+            <p className="mb-4">
+              You can reach Istanbul, one of the most visited cities in the
+              world, with its new and big airport (IST). Istanbul is the largest
+              city in Europe. The city is quite affordable; public
+              transportation is developed and cheap, and its residents are
+              hospitable. Things to do before leaving the city; visit Hagia
+              Sophia, Basilica Cistern, Topkapi and Dolmabahce Palaces,
+              Bosphorus, and Grand Bazaar; Eat baklava, Turkish delight, doner
+              kebabs and drink Turkish coffee and raki.
+            </p>
+          </>
+        ),
+      },
+      {
+        title: "Quick Tips",
+        content: (
+          <div className="bg-purple-100 rounded-3xl py-4 px-2">
+            <h3 className="text-2xl font-medium text-[#1a1a2e] mb-3 px-4">
+              Quick Tips
+            </h3>
+            <div className="space-y-2">
+              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+                <div className="flex items-center">
+                  <p className="font-medium">Timezone:</p>
+                  <p className="ml-2">GMT +3</p>
+                </div>
+                <p className="text-gray-500">Current Time</p>
+              </div>
+
+              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+                <div className="flex items-center">
+                  <p className="font-medium">Visa:</p>
+                  <p className="ml-2">Tourist Visa (30/90 Days) & E-Visa</p>
+                </div>
+                <p className="text-gray-500">Requirements</p>
+              </div>
+
+              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+                <div className="flex items-center">
+                  <p className="font-medium">Currency:</p>
+                  <p className="ml-2">Turkish Lira</p>
+                </div>
+                <p className="text-gray-500">Current Time</p>
+              </div>
+
+              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+                <div className="flex items-center">
+                  <p className="font-medium">Currency:</p>
+                  <p className="ml-2">Turkish Lira</p>
+                </div>
+                <p className="text-gray-500">Exchange Rate</p>
+              </div>
+
+              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+                <div className="flex items-center">
+                  <p className="font-medium">Official Language:</p>
+                  <p className="ml-2">Turkish</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-full px-6 py-4 flex justify-between items-center">
+                <div className="flex items-center">
+                  <p className="font-medium">Weather:</p>
+                  <p className="ml-2">There are four climates</p>
+                </div>
+                <p className="text-gray-500">Weather Report</p>
+              </div>
+            </div>
+          </div>
+        ),
       },
     ],
-    "Participation & Application": [
+    "Getting to Istanbul": [
       {
-        question: "Who can participate?",
-        answer:
-          "Anyone passionate about blockchain! Whether you’re a developer, designer, or just curious about Ethereum, you’re welcome to apply. No prior experience? No problem, you’ll find plenty of support from mentors and fellow hackers.",
-      },
-      {
-        question: "How can I apply to participate?",
-        answer:
-          "Anyone passionate about blockchain! Whether you’re a developer, designer, or just curious about Ethereum, you’re welcome to apply. No prior experience? No problem, you’ll find plenty of support from mentors and fellow hackers.",
-      },
-      {
-        question: "Can I apply as a team?",
-        answer:
-          "Anyone passionate about blockchain! Whether you’re a developer, designer, or just curious about Ethereum, you’re welcome to apply. No prior experience? No problem, you’ll find plenty of support from mentors and fellow hackers.",
+        content: (
+          <div className="bg-purple-100 rounded-3xl py-4 px-4">
+            <h3 className="text-2xl font-medium text-[#1a1a2e] mb-4">
+              Getting to Istanbul
+            </h3>
+
+            <div className="mb-6">
+              <p className="mb-2 font-medium">Visa Requirements:</p>
+              <p className="text-gray-700">
+                Get your visa before you start your trip. Fortunately, Türkiye
+                offers visa-free visits to citizens of many countries. Find out
+                if you need a Visa by clicking{" "}
+                <span className="text-blue-600 underline">here</span>.
+              </p>
+            </div>
+
+            <div>
+              <p className="text-xl font-medium mb-4">Istanbul Airports</p>
+
+              <div className="space-y-4">
+                <div className="bg-white rounded-2xl p-4 flex justify-between items-center">
+                  <div>
+                    <p className="font-bold">IST (Istanbul Airport)</p>
+                    <p className="text-sm text-gray-700">{`Istanbul's main airport, located on the European side, can be reached by metro, bus, and taxi.`}</p>
+                  </div>
+                  <button className="bg-purple-300 text-purple-800 px-4 py-2 rounded-full">
+                    Get Directions
+                  </button>
+                </div>
+
+                <div className="bg-white rounded-2xl p-4 flex justify-between items-center">
+                  <div>
+                    <p className="font-bold">SAW (Sabiha Gökçen Airport)</p>
+                    <p className="text-sm text-gray-700">{`Istanbul's secondary airport, located on the Asian side, can be reached by metro, bus, and taxi.`}</p>
+                  </div>
+                  <button className="bg-purple-300 text-purple-800 px-4 py-2 rounded-full">
+                    Get Directions
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
       },
     ],
-    "Costs & Benefits": [
+    "Where to Stay": [
       {
-        question: "How much does it cost to attend?",
-        answer:
-          "Anyone passionate about blockchain! Whether you’re a developer, designer, or just curious about Ethereum, you’re welcome to apply. No prior experience? No problem, you’ll find plenty of support from mentors and fellow hackers.",
+        content: (
+          <div className="bg-purple-100 rounded-3xl py-4 px-4">
+            <h3 className="text-2xl font-medium text-[#1a1a2e] mb-4">
+              Where to Stay
+            </h3>
+
+            <div className="mb-6">
+              <p className="mb-4">
+                The Bosphorus divides Istanbul right in the middle. Districts
+                where you can stay on the European side: Historical peninsula
+                (Fatih), Beyoğlu, Karaköy, Galata, Şişli, Beşiktaş, Nişantaşı,
+                Osmanbey, Maçka, Sarıyer, Etiler, Bebek, Arnavutköy, Emirgan,
+                Yeniköy, Levent, Maslak.
+              </p>
+              <p className="mb-4">
+                Districts where you can stay on the Asian side: Kadıköy,
+                Üsküdar, Bostancı, Kuzguncuk, Kandilli, Çengelköy, Kanlıca,
+                Beykoz, Kuleli, Harem.
+              </p>
+            </div>
+
+            <div className="flex justify-between items-center mb-6">
+              <p className="font-bold">The coolest neighborhoods in Istanbul</p>
+              <div className="flex items-center text-gray-600">
+                <span>→</span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl overflow-hidden mb-6">
+              <Image
+                src={IstanbulMap}
+                alt="Istanbul Map"
+                width={800}
+                height={400}
+                className="w-full h-64 object-cover"
+              />
+            </div>
+
+            <ul className="list-disc pl-5 mt-2">
+              <li>Karaköy - For hipster cafes and galleries</li>
+              <li>Kadıköy - Vibrant Asian side neighborhood</li>
+              <li>Beyoğlu - For nightlife and shopping</li>
+              <li>Sultanahmet - Historic center with major attractions</li>
+            </ul>
+          </div>
+        ),
       },
     ],
-    "Experience & Networking": [
+    "History, Culture & Food": [
       {
-        question: "Can I attend just as a spectator?",
-        answer:
-          "Anyone passionate about blockchain! Whether you’re a developer, designer, or just curious about Ethereum, you’re welcome to apply. No prior experience? No problem, you’ll find plenty of support from mentors and fellow hackers.",
+        content: (
+          <>
+            <p className="mb-4">
+              Istanbul does not only stand out because it is the only city
+              established on two continents. As a corner where many
+              civilizations and cultures intersect, it is a part of the common
+              heritage of human history.
+            </p>
+            <p className="mb-4">
+              It is thought that the first permanent settlement was made by the
+              Greek colonists around the 7th century BC, under the name
+              Byzantium. The Roman Emperor Constantine the Great named the city
+              Constantinople after he chose the city as the new capital of the
+              Roman Empire, and the Medieval Ages began. When the Ottomans
+              conquered the city in 1453, the Middle Ages closed, and the New
+              Age began, and the name Constantinople continued to be used until
+              the 1930s. With the establishment of the modern Turkish Republic,
+              the name of the city becomes Istanbul.
+            </p>
+            <div className="mt-6">
+              <p className="font-bold mb-2">
+                Recommended Restaurants to Try Turkish Cuisine:
+              </p>
+              <ul className="list-disc pl-5">
+                <li>Çiya Sofrası - Traditional Anatolian cuisine</li>
+                <li>Karaköy Lokantası - Classic Turkish dishes</li>
+                <li>Mikla - Modern Turkish fine dining</li>
+                <li>Asitane - Ottoman palace cuisine</li>
+                <li>
+                  Hatay Medeniyetler Sofrası - Southern Turkish specialties
+                </li>
+              </ul>
+            </div>
+          </>
+        ),
       },
     ],
+    "Tips from Locals": [
+      {
+        content: (
+          <>
+            <div className="mb-6">
+              <p className="font-bold mb-2">Currency & Payment</p>
+              <ul className="list-disc pl-5">
+                <li>Turkish Lira is the local currency</li>
+                <li>
+                  Credit Card: You can use your credit card almost anywhere, but
+                  you may need to have cash for taxis
+                </li>
+                <li>
+                  Best exchange: Instead of currency exchange at airports, you
+                  can prefer exchange offices in the busiest parts of the city
+                </li>
+              </ul>
+            </div>
+            <div className="mb-6">
+              <p className="font-bold mb-2">Mobile & Internet</p>
+              <ul className="list-disc pl-5">
+                <li>E-SIM providers: You can use Holafly or Airalo</li>
+                <li>
+                  {`                  SIM cards with best 4G coverage: Turkcell, Türk Telekom and
+                  Vodafone are Turkey's largest service providers
+`}
+                </li>
+              </ul>
+            </div>
+            <div className="mb-6">
+              <p className="font-bold mb-2">Other Tips</p>
+              <ul className="list-disc pl-5">
+                <li>Tipping culture: 5-10% will please everyone</li>
+                <li>
+                  Tap Water: Not recommended for drinking. Bottled water is
+                  available everywhere
+                </li>
+                <li>Emergency number: 112</li>
+                <li>
+                  Negotiating: Feel free to bargain in touristy markets and
+                  bazaars
+                </li>
+              </ul>
+            </div>
+            <div className="mb-6">
+              <p className="font-bold mb-2">
+                CatIstanbul: Cats and Dogs of the City
+              </p>
+              <p>
+                Did you know that more than a million stray cats live on the
+                streets of Istanbul? Most of the stray cats videos you probably
+                see on social media were recorded in Istanbul. The love of
+                animals is an integral part of Turkish culture.
+              </p>
+            </div>
+            <div>
+              <p className="font-bold mb-2">Do locals speak English?</p>
+              <p>
+                Yes, many of them speak English, although not very fluent. And
+                no matter what, when you ask them a question, they try very hard
+                to answer. You can ask any question you want.
+              </p>
+            </div>
+          </>
+        ),
+      },
+    ],
+    Transportation: [
+      {
+        content: (
+          <>
+            <p className="mb-4">
+              {`Istanbul's public transport possibilities are varied and the
+              departure times are arranged quite frequently. As a cheap and
+              effective transportation option, you can keep your carbon
+              footprint to a minimum by choosing public transportation. Public
+              transport and highways are very busy between 7:30-10:30 AM and
+              4:30-7:30 PM.`}
+            </p>
+
+            <p className="font-bold mt-4 mb-2">
+              Your Public Transport Options:
+            </p>
+            <ul className="list-disc pl-5 mb-6">
+              <li>
+                <span className="font-medium">Metro:</span>{" "}
+                {`"M" is the sign of
+                    metro Istanbul. By using the lines connecting various points of
+                    the city, you can reach your desired destination in the fastest
+                    and most comfortable way.`}
+              </li>
+              <li>
+                <span className="font-medium">Metrobus:</span> It is a special
+                bus line that connects the European side of the city and the
+                Anatolian side using the D-100 highway using the Bosphorus
+                Bridge.
+              </li>
+              <li>
+                <span className="font-medium">Tram:</span> You can explore the
+                city with Tram lines connecting the most historical areas.
+              </li>
+              <li>
+                <span className="font-medium">Ferry (Vapur):</span> It is by far
+                the most characteristic and first public transportation vehicle
+                of Istanbul.
+              </li>
+              <li>
+                <span className="font-medium">Marmaray:</span> You can use this
+                tube crossing, which connects Europe to Asia with a railway
+                under the Bosphorus.
+              </li>
+            </ul>
+
+            <p className="mb-4">
+              To use public transport, you need a public transport card called
+              Istanbulkart. You can get this card from kiosks, metro stations,
+              piers and some bus stops all over the city.
+            </p>
+
+            <p className="font-bold mt-4 mb-2">
+              Transportation from Airports to City Center:
+            </p>
+            <ul className="list-disc pl-5">
+              <li>
+                <span className="font-medium">Havabus:</span> Official bus lines
+                operating between Sabiha Gökçen Airport (SAW) and Taksim,
+                Kadıköy and Yenisahra districts.
+              </li>
+              <li>
+                <span className="font-medium">Havaist:</span> Official bus lines
+                connecting various points of the city with Istanbul Airport
+                (IST).
+              </li>
+              <li>
+                <span className="font-medium">Metro:</span> You can reach
+                Istanbul Sabiha Gökçen Airport (SAW) with the M4 line, and
+                Istanbul Airport (IST) with the M11 line.
+              </li>
+            </ul>
+          </>
+        ),
+      },
+    ],
+    Safety: [
+      {
+        content: (
+          <>
+            <p className="mb-4">
+              It is a safe city in general. However, it should not be forgotten
+              that Istanbul is a very large and global city with a population of
+              over twenty million. Therefore, pay attention to our
+              recommendations.
+            </p>
+
+            <ul className="list-disc pl-5 mb-4">
+              <li>
+                Keep an eye on your belongings in tourist areas when public
+                transport is at its busiest.
+              </li>
+              <li>
+                Use applications such as BiTaksi, Uber: If you are going to
+                travel by taxi, prefer to travel with the vehicles you will call
+                from these applications.
+              </li>
+              <li>Use public transport when possible.</li>
+              <li>
+                Respect the dress code in places of religious importance: Dress
+                appropriately for mosques and places of worship such as the Blue
+                Mosque, Hagia Sophia, Topkapı Palace Museum of Sacred Relics.
+                Female visitors will be asked to cover their heads lightly.
+              </li>
+              <li>
+                Earthquake risk: Istanbul expects an earthquake that could cause
+                significant damage in the upcoming time period. You may want to
+                learn about the earthquake resistance of the building you will
+                be staying in.
+              </li>
+            </ul>
+
+            <p>
+              In case of emergency, dial 112 for all emergency services (police,
+              ambulance, fire).
+            </p>
+          </>
+        ),
+      },
+    ],
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
   };
 
   return (
-    <section
-      id="faq"
-      className="min-h-screen pt-24 pb-32 bg-[#D1BAFF]"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div>
-          <h2 className="text-8xl sm:text-9xl font-bold mb-10 text-[#1a1a2e]">
-            ISTANBUL GUIDE
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-          <div className="md:col-span-4">
-            <div className="flex flex-col space-y-6">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`text-left text-lg cursor-pointer transition-colors duration-300 ${
-                    activeCategory === category
-                      ? "text-black font-bold"
-                      : "text-gray-600 hover:text-black"
-                  }`}
+    <>
+      <Navbar position="top" />
+      <section
+        id="istanbul-guide"
+        className="min-h-screen pt-44 pb-32 bg-[#D1BAFF]"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div>
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-10 text-[#1a1a2e]">
+              ISTANBUL GUIDE
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+            <div className="md:col-span-3">
+              <div className="flex flex-col space-y-6">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={`text-left text-lg cursor-pointer transition-colors duration-300 ${
+                      activeCategory === category
+                        ? "text-black font-bold"
+                        : "text-gray-600 hover:text-black"
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="md:col-span-9">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCategory}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  variants={contentVariants}
+                  className="space-y-8"
                 >
-                  {category}
-                </button>
-              ))}
+                  {contentData[activeCategory].map((section, index) => (
+                    <div
+                      key={index}
+                      className="mb-6"
+                    >
+                      {section.title && activeCategory !== "General Info" && (
+                        <h3 className="text-2xl font-medium text-[#1a1a2e] mb-3">
+                          {section.title}
+                        </h3>
+                      )}
+                      <div className="text-gray-800">{section.content}</div>
+                    </div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
-
-          <div className="md:col-span-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeCategory}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-5"
-              >
-                {questionsData[activeCategory].map((item, index) => (
-                  <div
-                    key={index}
-                    className="border-b border-[#7C7786]"
-                  >
-                    <button
-                      onClick={() => toggleQuestion(item.question)}
-                      className="w-full flex justify-between cursor-pointer items-center py-6 text-left focus:outline-none"
-                    >
-                      <h3 className="text-xl font-medium text-[#1a1a2e]">
-                        {item.question}
-                      </h3>
-                      <span className="text-2xl">
-                        {activeQuestions[item.question] ? "−" : "+"}
-                      </span>
-                    </button>
-
-                    <AnimatePresence>
-                      {activeQuestions[item.question] && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <p className="pb-6 text-gray-700">{item.answer}</p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
-export default Page;
+export default IstanbulGuidePage;
