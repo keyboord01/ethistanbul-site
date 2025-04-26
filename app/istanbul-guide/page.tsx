@@ -508,7 +508,7 @@ const IstanbulGuidePage = () => {
       <Navbar position="top" />
       <section
         id="istanbul-guide"
-        className="min-h-screen pt-44 bg-[#D1BAFF]"
+        className="min-h-screen pt-44 bg-[#E0D2FF]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div>
