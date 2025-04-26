@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import IstanbulMap from "@/assets/istanbul_map.png";
 import Navbar from "@/components/ui/nav-bar";
 type Category =
   | "General Info"
@@ -193,14 +191,18 @@ const IstanbulGuidePage = () => {
               </div>
             </div>
 
-            <div className="rounded-2xl overflow-hidden mb-6">
-              <Image
-                src={IstanbulMap}
-                alt="Istanbul Map"
-                width={800}
-                height={400}
-                className="w-full h-64 object-cover"
-              />
+            <div className="rounded-2xl overflow-hidden mb-6 w-full h-96">
+              <iframe
+                src="https://www.google.com/maps/d/embed?mid=1f849Kw3dnj-ir_3ByWY9JDZlLMb2bBs&femb=1&ll=41.03872994995544%2C29.027711600000003&z=11"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Istanbul Neighborhoods Map"
+                className="w-full h-full"
+              ></iframe>
             </div>
 
             <ul className="list-disc pl-5 mt-2">
