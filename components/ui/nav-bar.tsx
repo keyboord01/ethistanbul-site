@@ -69,34 +69,60 @@ const Navbar = ({ position }: { position?: string }) => {
   const navLinks = [
     {
       label: "Overview",
-      href: window.location.pathname !== "/" ? "/#overview" : "#overview",
+      href:
+        typeof window !== "undefined" && window.location.pathname !== "/"
+          ? "/#overview"
+          : "#overview",
     },
     {
       label: "Schedule",
-      href: window.location.pathname !== "/" ? "/#schedule" : "#schedule",
+      href:
+        typeof window !== "undefined" && window.location.pathname !== "/"
+          ? "/#schedule"
+          : "#schedule",
     },
     {
       label: "HackerKit",
-      href: window.location.pathname !== "/" ? "/#hacker-kit" : "#hacker-kit",
+      href:
+        typeof window !== "undefined" && window.location.pathname !== "/"
+          ? "/#hacker-kit"
+          : "#hacker-kit",
     },
     {
       label: "Contributors",
       href:
-        window.location.pathname !== "/" ? "/#contributors" : "#contributors",
+        typeof window !== "undefined" && window.location.pathname !== "/"
+          ? "/#contributors"
+          : "#contributors",
     },
     {
       label: "Partners",
-      href: window.location.pathname !== "/" ? "/#partners" : "#partners",
+      href:
+        typeof window !== "undefined" && window.location.pathname !== "/"
+          ? "/#partners"
+          : "#partners",
     },
     {
       label: "Venue",
-      href: window.location.pathname !== "/" ? "/#venue" : "#venue",
+      href:
+        typeof window !== "undefined" && window.location.pathname !== "/"
+          ? "/#venue"
+          : "#venue",
     },
     {
       label: "Prizes",
-      href: window.location.pathname !== "/" ? "/#prizes" : "#prizes",
+      href:
+        typeof window !== "undefined" && window.location.pathname !== "/"
+          ? "/#prizes"
+          : "#prizes",
     },
-    { label: "FAQ", href: window.location.pathname !== "/" ? "/#faq" : "#faq" },
+    {
+      label: "FAQ",
+      href:
+        typeof window !== "undefined" && window.location.pathname !== "/"
+          ? "/#faq"
+          : "#faq",
+    },
   ];
 
   return (

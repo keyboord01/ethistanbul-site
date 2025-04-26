@@ -257,7 +257,12 @@ const Overview = () => {
               <div className="absolute top-6 right-6">
                 <button
                   className="bg-purple-200 text-purple-900 px-6 pb-2 pt-1 border-1 border-black rounded-full flex items-center gap-2 hover:bg-purple-300 transition-all cursor-pointer"
-                  onClick={() => window.open("/istanbul-guide", "_blank")}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (typeof window !== "undefined") {
+                      window.open("/istanbul-guide", "_blank");
+                    }
+                  }}
                 >
                   Istanbul Guide
                   <svg
