@@ -67,14 +67,36 @@ const Navbar = ({ position }: { position?: string }) => {
   };
 
   const navLinks = [
-    { label: "Overview", href: "#overview" },
-    { label: "Schedule", href: "#schedule" },
-    { label: "HackerKit", href: "#hacker-kit" },
-    { label: "Contributors", href: "#contributors" },
-    { label: "Partners", href: "#partners" },
-    { label: "Venue", href: "#venue" },
-    { label: "Prizes", href: "#prizes" },
-    { label: "FAQ", href: "#faq" },
+    {
+      label: "Overview",
+      href: window.location.pathname !== "/" ? "/#overview" : "#overview",
+    },
+    {
+      label: "Schedule",
+      href: window.location.pathname !== "/" ? "/#schedule" : "#schedule",
+    },
+    {
+      label: "HackerKit",
+      href: window.location.pathname !== "/" ? "/#hacker-kit" : "#hacker-kit",
+    },
+    {
+      label: "Contributors",
+      href:
+        window.location.pathname !== "/" ? "/#contributors" : "#contributors",
+    },
+    {
+      label: "Partners",
+      href: window.location.pathname !== "/" ? "/#partners" : "#partners",
+    },
+    {
+      label: "Venue",
+      href: window.location.pathname !== "/" ? "/#venue" : "#venue",
+    },
+    {
+      label: "Prizes",
+      href: window.location.pathname !== "/" ? "/#prizes" : "#prizes",
+    },
+    { label: "FAQ", href: window.location.pathname !== "/" ? "/#faq" : "#faq" },
   ];
 
   return (
