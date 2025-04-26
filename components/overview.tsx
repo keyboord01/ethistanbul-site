@@ -180,8 +180,8 @@ const Overview = () => {
               ) : (
                 <div>
                   <p className="text-base sm:text-lg">Available in prizes</p>
-                  <p className="text-xl sm:text-2xl md:text-3xl text-purple-600">
-                    $XXX,XXX
+                  <p className="text-xl sm:text-2xl md:text-3xl text-purple-600 font-bold">
+                    TBA
                   </p>
                 </div>
               )}
@@ -246,7 +246,7 @@ const Overview = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 justify-center max-w-4xl">
-            <div className="relative group rounded-4xl overflow-hidden shadow-lg max-w-md mx-auto">
+            <div className="relative group rounded-4xl overflow-hidden max-w-md mx-auto">
               <Image
                 src={IstanbulGuideImage}
                 alt="Istanbul Bridge"
@@ -284,7 +284,7 @@ const Overview = () => {
               </div>
             </div>
 
-            <div className="relative group rounded-4xl overflow-hidden shadow-lg max-w-md mx-auto">
+            <div className="relative group rounded-4xl overflow-hidden max-w-md mx-auto">
               <Image
                 src={BuildersWeekImage}
                 alt="Builders Week"
