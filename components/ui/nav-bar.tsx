@@ -67,14 +67,14 @@ const Navbar = ({ position }: { position?: string }) => {
   };
 
   const navLinks = [
-    { label: "Overview", href: "/#overview" },
-    { label: "Schedule", href: "/#schedule" },
-    { label: "HackerKit", href: "/#hacker-kit" },
-    { label: "Judges & Speakers", href: "/#judges" },
-    { label: "Partners", href: "/#partners" },
-    { label: "Venue", href: "/#venue" },
-    { label: "Prizes", href: "/#prizes" },
-    { label: "FAQ", href: "/#faq" },
+    { label: "Overview", href: "#overview" },
+    { label: "Schedule", href: "#schedule" },
+    { label: "HackerKit", href: "#hacker-kit" },
+    { label: "Contributors", href: "#contributors" },
+    { label: "Partners", href: "#partners" },
+    { label: "Venue", href: "#venue" },
+    { label: "Prizes", href: "#prizes" },
+    { label: "FAQ", href: "#faq" },
   ];
 
   return (
