@@ -141,7 +141,7 @@ const Navbar = ({ position }: { position?: string }) => {
         }}
       >
         <motion.div
-          className="container max-w-7xl bg-white text-black rounded-full px-6 sm:px-8 md:px-12 py-3 flex items-center justify-between"
+          className="container max-w-7xl bg-white border-1 border-black text-black rounded-full px-6 sm:px-8 md:px-12 py-3 flex items-center justify-between"
           layout
           transition={{
             type: "spring",
