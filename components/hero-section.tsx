@@ -56,12 +56,8 @@ const HeroSection = () => {
         <h1 className="text-6xl md:text-8xl font-bold mb-8">ETHISTANBUL</h1>
 
         <div className="flex flex-col sm:flex-row gap-4 text-gray-800">
-          <button className="bg-white hover:bg-gray-200 px-8 pb-2 pt-1 rounded-full font-medium transition-all cursor-pointer">
-            Get Your Tickets
-          </button>
-          <button className="bg-white hover:bg-gray-200 px-8 pb-2 pt-1 rounded-full font-medium transition-all cursor-pointer">
-            Apply To Hack
-          </button>
+          <LiquidButton className="border-none">Get Your Tickets</LiquidButton>
+          <LiquidButton className="border-none">Apply To Hack</LiquidButton>
         </div>
       </div>
 
