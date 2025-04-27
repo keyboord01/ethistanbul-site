@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import mentors from "@/lib/contributors/mentors";
+import LiquidButton from "./ui/liquid-button";
+
 type ContributorType = "Judges" | "Speakers" | "Mentors";
 
 interface Contributor {
@@ -31,17 +33,17 @@ const Contributors = () => {
 
         <div className="flex flex-wrap gap-2 sm:gap-4 mb-8 md:mb-12">
           {contributorTypes.map((type) => (
-            <button
+            <LiquidButton
               key={type}
               onClick={() => setActiveType(type)}
               className={`px-4 sm:px-8 py-2 text-sm sm:text-base rounded-full border transition-colors duration-300 ${
                 activeType === type
-                  ? "bg-purple-200 border-purple-300"
+                  ? "!bg-purple-200 !border-purple-300"
                   : "border-gray-300 hover:bg-gray-100"
               }`}
             >
               {type}
-            </button>
+            </LiquidButton>
           ))}
         </div>
 
@@ -101,20 +103,16 @@ const ContributorCard = ({ contributor }: { contributor: Contributor }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
 
-  const isActive = isHovered || isTouched;
-
   return (
-    <div
-      className="rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer relative"
+    <motion.div
+      className="rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={() => setIsTouched(!isTouched)}
+      initial={{ scale: 1 }}
+      transition={{ duration: 0.2 }}
     >
-      <div
-        className={`relative h-40 sm:h-48 md:h-56 lg:h-64 w-full overflow-hidden transition-all duration-500 ${
-          isActive ? "scale-105" : ""
-        }`}
-      >
+      <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 w-full overflow-hidden">
         <Image
           src={contributor.image}
           alt={contributor.name}
@@ -124,47 +122,23 @@ const ContributorCard = ({ contributor }: { contributor: Contributor }) => {
           loading="lazy"
         />
 
-        <motion.div
-          className={`absolute bottom-0 left-0 border-black right-0 bg-white bg-opacity-90 overflow-hidden ${
-            isActive ? "border-t" : "border"
-          }`}
-          initial={{
-            height: "auto",
-            borderRadius: "9999px",
-            bottom: "8px",
-            left: "8px",
-            right: "8px",
-            padding: "4px 0",
-          }}
-          animate={{
-            height: isActive ? "auto" : "auto",
-            borderRadius: isActive ? "16px" : "50px",
-            bottom: isActive ? "-4px" : "8px",
-            left: isActive ? 0 : "8px",
-            right: isActive ? 0 : "8px",
-            padding: isActive ? "12px 0" : "4px 0",
-          }}
-        >
-          <div className="text-center px-3">
-            <div className="text-xs sm:text-sm md:text-base text-black font-bold mb-1">
-              {contributor.name}
-            </div>
-
+        <div className="absolute bottom-2 sm:bottom-4 left-2 right-2 sm:left-4 sm:right-4 md:left-6 md:right-6 pb-1 bg-white border border-black rounded-full bg-opacity-90 text-center">
+          {" "}
+          <AnimatePresence mode="wait">
             <motion.div
-              className="text-xs sm:text-sm text-black"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{
-                opacity: isActive ? 1 : 0,
-                height: isActive ? "auto" : 0,
-              }}
-              transition={{ duration: 0.3, delay: isActive ? 0.1 : 0 }}
+              key={isHovered || isTouched ? "company" : "name"}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="text-xs sm:text-sm md:text-base text-black font-medium px-2 py-1"
             >
-              {contributor.company}
+              {isHovered || isTouched ? contributor.company : contributor.name}{" "}
             </motion.div>
-          </div>
-        </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default Contributors;
