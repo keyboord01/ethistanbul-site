@@ -22,7 +22,7 @@ const Contributors = () => {
   return (
     <section
       id="contributors"
-      className="min-h-screen pt-16 pb-20 md:pt-24 md:pb-32"
+      className="min-h-screen pt-16 pb-20 md:pt-24 md:pb-32 bg-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div>

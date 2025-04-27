@@ -12,6 +12,21 @@
   --brand-pink: #f7a7e1; /* DEX F7A7E1 */
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--brand-purple),
+    var(--brand-purple)
+  );
+  z-index: -1;
+}
+
 @font-face {
   font-family: "Darker_Grotesque";
   src: url("/fonts/DarkerGrotesque.ttf") format("truetype");
