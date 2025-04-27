@@ -9,6 +9,7 @@ import CountUp from "react-countup";
 import IstanbulGuideImage from "@/assets/istanbul_bridge.png";
 import BuildersWeekImage from "@/assets/galataport.png";
 import LiquidButton from "./ui/liquid-button";
+
 const LeftStar = (
   props: React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
 ) => (
@@ -44,9 +45,7 @@ const RightStar = (
   </svg>
 );
 
-const Overview = () => {
-  const [selectedSection, setSelectedSection] = useState("Conference");
-
+const TechTicker = React.memo(() => {
   const techKeywords = [
     "Edge Proofs",
     "DeFi",
@@ -63,6 +62,44 @@ const Overview = () => {
     "Zero Knowledge Proofs",
   ];
 
+  return (
+    <div className="w-full mt-10 sm:mt-16 md:mt-20 py-2 overflow-hidden bg-[#c0fab2]">
+      <div className="ticker-container">
+        <div className="ticker-track">
+          <div className="ticker-content">
+            {techKeywords.map((keyword, index) => (
+              <span
+                key={`original-${index}`}
+                className="ticker-item"
+              >
+                {keyword}
+              </span>
+            ))}
+          </div>
+
+          <div className="ticker-content">
+            {techKeywords.map((keyword, index) => (
+              <span
+                key={`duplicate-${index}`}
+                className="ticker-item"
+              >
+                {keyword}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+TechTicker.displayName = "TechTicker";
+
+const Overview = () => {
+  const [selectedSection, setSelectedSection] = useState("Conference");
+
+  const memoizedTechTicker = React.useMemo(() => <TechTicker />, []);
+
   const contentVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -70,7 +107,7 @@ const Overview = () => {
 
   return (
     <section
-      className="pt-10 sm:pt-16 md:pt-20 overflow-hidden"
+      className="pt-10 bg-white sm:pt-16 md:pt-20 overflow-hidden"
       id="overview"
     >
       <div className="max-w-7xl container mx-auto px-4 sm:px-6">
@@ -185,32 +222,8 @@ const Overview = () => {
         </div>
       </div>
 
-      <div className="w-full mt-10 sm:mt-16 md:mt-20 py-2 overflow-hidden bg-[#c0fab2]">
-        <div className="ticker-container">
-          <div className="ticker-track">
-            <div className="ticker-content">
-              {techKeywords.map((keyword, index) => (
-                <span
-                  key={`original-${index}`}
-                  className="ticker-item"
-                >
-                  {keyword}
-                </span>
-              ))}
-            </div>
-
-            <div className="ticker-content">
-              {techKeywords.map((keyword, index) => (
-                <span
-                  key={`duplicate-${index}`}
-                  className="ticker-item"
-                >
-                  {keyword}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+      <div className="w-full mt-10 sm:mt-16 md:mt-20 py-2 overflow-hidden">
+        {memoizedTechTicker}
       </div>
 
       <div className="relative pt-20 pb-20 bg-white overflow-hidden">
