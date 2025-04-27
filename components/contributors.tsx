@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import mentors from "@/lib/contributors/mentors";
 import LiquidButton from "./ui/liquid-button";
+import Arrow from "@/assets/ui/arrow.svg";
 
 type ContributorType = "Judges" | "Speakers" | "Mentors";
 
@@ -105,7 +106,7 @@ const ContributorCard = ({ contributor }: { contributor: Contributor }) => {
 
   return (
     <motion.div
-      className="rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer"
+      className="rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={() => setIsTouched(!isTouched)}
@@ -121,9 +122,31 @@ const ContributorCard = ({ contributor }: { contributor: Contributor }) => {
           className="object-cover -translate-y-[2px]"
           loading="lazy"
         />
-
+        <div
+          className={`absolute inset-0 bg-[#D1BAFF66] transition-color duration-300 ${
+            isHovered ? "opacity-80" : "opacity-0"
+          } `}
+        />
+        {isHovered && (
+          <>
+            <motion.div
+              initial={{ opacity: 0, x: 10, y: -10 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              exit={{ opacity: 0, x: 10, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-2 right-2 sm:top-4 sm:right-4"
+            >
+              <Image
+                src={Arrow}
+                alt="Arrow"
+                width={32}
+                height={32}
+                className="object-contain"
+              />
+            </motion.div>
+          </>
+        )}
         <div className="absolute bottom-2 sm:bottom-4 left-2 right-2 sm:left-4 sm:right-4 md:left-6 md:right-6 pb-1 bg-white border border-black rounded-full bg-opacity-90 text-center">
-          {" "}
           <AnimatePresence mode="wait">
             <motion.div
               key={isHovered || isTouched ? "company" : "name"}
