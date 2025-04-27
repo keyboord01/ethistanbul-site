@@ -4,6 +4,7 @@ import Image from "next/image";
 import Navbar from "./ui/nav-bar";
 import IstanbulBackground from "@/assets/istanbul-background.png";
 import { motion } from "framer-motion";
+import LiquidButton from "./ui/liquid-button";
 
 const HeroSection = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,9 +46,9 @@ const HeroSection = () => {
           damping: 20,
         }}
       >
-        <button className="bg-white text-gray-800 border border-black hover:bg-gray-100 px-5 pb-2 pt-1 rounded-full font-medium text-lg cursor-pointer">
+        <LiquidButton className="text-gray-800 border border-black hover:bg-gray-100 px-5 pb-2 pt-1 rounded-full font-medium text-lg cursor-pointer">
           Interested in partnering?
-        </button>
+        </LiquidButton>
       </motion.div>
 
       <div className="relative z-10 flex flex-col h-full justify-center items-center text-white px-4 mt-[-8vh]">

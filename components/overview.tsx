@@ -8,6 +8,7 @@ import HackathonImage from "@/assets/hackathon_image.png";
 import CountUp from "react-countup";
 import IstanbulGuideImage from "@/assets/istanbul_bridge.png";
 import BuildersWeekImage from "@/assets/galataport.png";
+import LiquidButton from "./ui/liquid-button";
 const LeftStar = (
   props: React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
 ) => (
@@ -85,26 +86,20 @@ const Overview = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mb-8 sm:mb-12 md:mb-16">
-          <button
-            className={`px-6 pb-2 pt-1 rounded-full transition-all text-base sm:text-lg md:text-xl lg:text-2xl w-full sm:w-auto border border-black cursor-pointer ${
-              selectedSection === "Conference"
-                ? "bg-purple-500 text-white"
-                : "bg-white text-gray-800 hover:bg-[#D1BAFF]"
-            }`}
+          <LiquidButton
+            isActive={selectedSection === "Conference"}
             onClick={() => setSelectedSection("Conference")}
+            className=" text-gray-800 text-base sm:text-lg md:text-xl lg:text-2xl"
           >
             Conference
-          </button>
-          <button
-            className={`px-6 pb-2 pt-1 rounded-full transition-all text-base sm:text-lg md:text-xl lg:text-2xl w-full sm:w-auto border border-black cursor-pointer ${
-              selectedSection === "Hackathon"
-                ? "bg-purple-500 text-white"
-                : "bg-white text-gray-800 hover:bg-[#D1BAFF]"
-            }`}
+          </LiquidButton>
+          <LiquidButton
+            isActive={selectedSection === "Hackathon"}
             onClick={() => setSelectedSection("Hackathon")}
+            className=" text-gray-800 text-base sm:text-lg md:text-xl lg:text-2xl"
           >
             Hackathon
-          </button>
+          </LiquidButton>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10">
