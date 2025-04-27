@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
-import Abdullah from "@/assets/contributors/abdullah.png";
-
+import mentors from "@/lib/contributors/mentors";
 type ContributorType = "Judges" | "Speakers" | "Mentors";
 
 interface Contributor {
@@ -18,148 +17,6 @@ const Contributors = () => {
   const [activeType, setActiveType] = useState<ContributorType>("Mentors");
 
   const contributorTypes: ContributorType[] = ["Judges", "Speakers", "Mentors"];
-
-  const contributors: Contributor[] = [
-    {
-      name: "Abdullah Eryuzlu",
-      company: "UNION",
-      image: Abdullah,
-      type: "Mentors",
-    },
-    {
-      name: "PhD Student at EPFL",
-      company: "UNION",
-      image: Abdullah,
-      type: "Mentors",
-    },
-    {
-      name: "Adnan Deniz Corlu",
-      company: "UNION",
-      image: Abdullah,
-      type: "Mentors",
-    },
-    {
-      name: "A. Ramazan Agirtas",
-      company: "UNION",
-      image: Abdullah,
-      type: "Judges",
-    },
-    {
-      name: "Alican Abgik",
-      company: "UNION",
-      image: Abdullah,
-      type: "Speakers",
-    },
-    {
-      name: "Abdullah Eryuzlu",
-      company: "UNION",
-      image: Abdullah,
-      type: "Mentors",
-    },
-    {
-      name: "PhD Student at EPFL",
-      company: "UNION",
-      image: Abdullah,
-      type: "Mentors",
-    },
-    {
-      name: "Adnan Deniz Corlu",
-      company: "UNION",
-      image: Abdullah,
-      type: "Mentors",
-    },
-    {
-      name: "A. Ramazan Agirtas",
-      company: "UNION",
-      image: Abdullah,
-      type: "Judges",
-    },
-    {
-      name: "Alican Abgik",
-      company: "UNION",
-      image: Abdullah,
-      type: "Speakers",
-    },
-    {
-      name: "Abdullah Eryuzlu",
-      company: "UNION",
-      image: Abdullah,
-      type: "Mentors",
-    },
-    {
-      name: "PhD Student at EPFL",
-      company: "UNION",
-      image: Abdullah,
-      type: "Mentors",
-    },
-    {
-      name: "Adnan Deniz Corlu",
-      company: "UNION",
-      image: Abdullah,
-      type: "Mentors",
-    },
-    {
-      name: "A. Ramazan Agirtas",
-      company: "UNION",
-      image: Abdullah,
-      type: "Judges",
-    },
-    {
-      name: "Alican Abgik",
-      company: "UNION",
-      image: Abdullah,
-      type: "Speakers",
-    },
-    {
-      name: "A. Ramazan Agirtas",
-      company: "UNION",
-      image: Abdullah,
-      type: "Judges",
-    },
-    {
-      name: "Alican Abgik",
-      company: "UNION",
-      image: Abdullah,
-      type: "Speakers",
-    },
-    {
-      name: "A. Ramazan Agirtas",
-      company: "UNION",
-      image: Abdullah,
-      type: "Judges",
-    },
-    {
-      name: "Alican Abgik",
-      company: "UNION",
-      image: Abdullah,
-      type: "Speakers",
-    },
-    {
-      name: "A. Ramazan Agirtas",
-      company: "UNION",
-      image: Abdullah,
-      type: "Judges",
-    },
-    {
-      name: "Alican Abgik",
-      company: "UNION",
-      image: Abdullah,
-      type: "Speakers",
-    },
-    {
-      name: "A. Ramazan Agirtas",
-      company: "UNION",
-      image: Abdullah,
-      type: "Judges",
-    },
-    {
-      name: "Alican Abgik",
-      company: "UNION",
-      image: Abdullah,
-      type: "Speakers",
-    },
-  ];
-
   return (
     <section
       id="contributors"
@@ -225,12 +82,12 @@ const Contributors = () => {
             transition={{ duration: 0.3 }}
             className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-6"
           >
-            {contributors
-              .filter((contributor) => contributor.type === activeType)
-              .map((contributor, index) => (
+            {mentors
+              .filter((mentors) => mentors.type === activeType)
+              .map((mentors, index) => (
                 <ContributorCard
                   key={index}
-                  contributor={contributor}
+                  contributor={mentors}
                 />
               ))}
           </motion.div>
@@ -244,40 +101,70 @@ const ContributorCard = ({ contributor }: { contributor: Contributor }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
 
+  const isActive = isHovered || isTouched;
+
   return (
-    <motion.div
-      className="rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer"
+    <div
+      className="rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={() => setIsTouched(!isTouched)}
-      initial={{ scale: 1 }}
-      transition={{ duration: 0.2 }}
     >
-      <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 w-full overflow-hidden">
+      <div
+        className={`relative h-40 sm:h-48 md:h-56 lg:h-64 w-full overflow-hidden transition-all duration-500 ${
+          isActive ? "scale-105" : ""
+        }`}
+      >
         <Image
           src={contributor.image}
           alt={contributor.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
-          className="object-cover"
+          className="object-cover -translate-y-[2px]"
+          loading="lazy"
         />
-        <div className="absolute bottom-2 sm:bottom-4 left-2 right-2 sm:left-4 sm:right-4 md:left-6 md:right-6 pb-1 bg-white border border-black rounded-full bg-opacity-90 text-center">
-          <AnimatePresence mode="wait">
+
+        <motion.div
+          className={`absolute bottom-0 left-0 border-black right-0 bg-white bg-opacity-90 overflow-hidden ${
+            isActive ? "border-t" : "border"
+          }`}
+          initial={{
+            height: "auto",
+            borderRadius: "9999px",
+            bottom: "8px",
+            left: "8px",
+            right: "8px",
+            padding: "4px 0",
+          }}
+          animate={{
+            height: isActive ? "auto" : "auto",
+            borderRadius: isActive ? "16px" : "50px",
+            bottom: isActive ? "-4px" : "8px",
+            left: isActive ? 0 : "8px",
+            right: isActive ? 0 : "8px",
+            padding: isActive ? "12px 0" : "4px 0",
+          }}
+        >
+          <div className="text-center px-3">
+            <div className="text-xs sm:text-sm md:text-base text-black font-bold mb-1">
+              {contributor.name}
+            </div>
+
             <motion.div
-              key={isHovered || isTouched ? "company" : "name"}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="text-xs sm:text-sm md:text-base text-black font-medium px-2 py-1"
+              className="text-xs sm:text-sm text-black"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{
+                opacity: isActive ? 1 : 0,
+                height: isActive ? "auto" : 0,
+              }}
+              transition={{ duration: 0.3, delay: isActive ? 0.1 : 0 }}
             >
-              {isHovered || isTouched ? contributor.company : contributor.name}
+              {contributor.company}
             </motion.div>
-          </AnimatePresence>
-        </div>
+          </div>
+        </motion.div>
       </div>
-    </motion.div>
+    </div>
   );
 };
-
 export default Contributors;
