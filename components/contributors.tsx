@@ -63,6 +63,25 @@ const Contributors = () => {
 
   const contributorTypes: ContributorType[] = ["Judges", "Speakers", "Mentors"];
 
+  const FORM_URLS: Record<ContributorType, string> = {
+    Judges: "https://forms.gle/v5ooyVinYTz1BESb8",
+    Mentors: "https://forms.gle/F2TQx7TU2jUmmA3N6",
+    Speakers: "https://forms.gle/iLFQbW7tc8SmiEcc6",
+  };
+
+  const getSingularType = (type: ContributorType) => {
+    switch (type) {
+      case "Judges":
+        return "Judge";
+      case "Speakers":
+        return "Speaker";
+      case "Mentors":
+        return "Mentor";
+      default:
+        return "Mentor";
+    }
+  };
+
   return (
     <section
       id="contributors"
@@ -94,11 +113,13 @@ const Contributors = () => {
         <div className="flex flex-col items-start sm:items-end justify-between mb-4 md:mb-6 gap-2">
           <div className="flex items-center">
             <span className="text-base sm:text-lg">
-              Do you want to be mentors?
+              Do you want to be a {getSingularType(activeType)}?
             </span>
           </div>
           <a
-            href="#"
+            href={FORM_URLS[activeType]}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center text-purple-600 font-medium"
           >
             Form
@@ -128,16 +149,27 @@ const Contributors = () => {
             transition={{ duration: 0.3 }}
             className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-6"
           >
-            {mentors
-              .filter((mentor) => mentor.type === activeType)
-              .map((mentor, index) => (
-                <ContributorCard
-                  key={index}
-                  contributor={mentor}
-                  onClick={() => handleContributorClick(mentor)}
-                  isMobile={isMobile}
-                />
-              ))}
+            {mentors.filter((mentor) => mentor.type === activeType).length ===
+            0 ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="col-span-full text-center py-12 text-gray-500 text-xl"
+              >
+                Coming Soon - TBA
+              </motion.div>
+            ) : (
+              mentors
+                .filter((mentor) => mentor.type === activeType)
+                .map((mentor, index) => (
+                  <ContributorCard
+                    key={index}
+                    contributor={mentor}
+                    onClick={() => handleContributorClick(mentor)}
+                    isMobile={isMobile}
+                  />
+                ))
+            )}
           </motion.div>
         </AnimatePresence>
 
