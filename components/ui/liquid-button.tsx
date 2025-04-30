@@ -3,12 +3,14 @@ import { useEffect, useRef, useState } from "react";
 const LiquidButton: React.FC<{
   children: React.ReactNode;
   isActive?: boolean;
+  disabled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
   activeColor?: string;
 }> = ({
   children,
   isActive,
+  disabled = false,
   onClick,
   className,
   activeColor = "bg-purple-500",
@@ -34,12 +36,10 @@ const LiquidButton: React.FC<{
     }
   }, [isActive, wasActive]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleMouseEnter = (e: any) => {
-    if (!buttonRef.current || isActive) return;
+  const handleMouseEnter = (e: React.MouseEvent) => {
+    if (!buttonRef.current || isActive || disabled) return;
 
     const rect = buttonRef.current.getBoundingClientRect();
-
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
@@ -49,12 +49,10 @@ const LiquidButton: React.FC<{
     setIsHovered(true);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleMouseLeave = (e: any) => {
-    if (!buttonRef.current) return;
+  const handleMouseLeave = (e: React.MouseEvent) => {
+    if (!buttonRef.current || disabled) return;
 
     const rect = buttonRef.current.getBoundingClientRect();
-
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
@@ -62,29 +60,29 @@ const LiquidButton: React.FC<{
     setIsHovered(false);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleClick = (e: any) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (disabled) return;
     if (onClick) onClick(e);
   };
 
   return (
     <button
       ref={buttonRef}
-      className={`relative overflow-hidden px-6 pb-2 pt-1 rounded-full w-full sm:w-auto border border-black cursor-pointer transition-all duration-300 ${className} ${
-        isActive ? activeColor + " text-white" : ""
+      disabled={disabled}
+      className={`relative overflow-hidden px-6 pb-2 pt-1 rounded-full w-full sm:w-auto border transition-all duration-300 ${
+        disabled
+          ? "bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed"
+          : `${className} ${
+              isActive ? activeColor + " text-white" : "border-black"
+            }`
       }`}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={isActive ? {} : { background: "white" }}
+      style={!disabled && !isActive ? { background: "white" } : undefined}
     >
-      {!isActive && (
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            overflow: "hidden",
-          }}
-        >
+      {!isActive && !disabled && (
+        <div className="absolute inset-0 pointer-events-none">
           <span
             className="absolute rounded-full"
             style={{

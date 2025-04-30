@@ -46,7 +46,10 @@ const HeroSection = () => {
           damping: 20,
         }}
       >
-        <LiquidButton className="text-gray-800 border border-black hover:bg-gray-100 px-5 pb-2 pt-1 rounded-full font-medium text-lg cursor-pointer">
+        <LiquidButton
+          disabled={true}
+          className="text-gray-800 border border-black hover:bg-gray-100 px-5 pb-2 pt-1 rounded-full font-medium text-lg cursor-pointer"
+        >
           Interested in partnering?
         </LiquidButton>
       </motion.div>
@@ -56,8 +59,18 @@ const HeroSection = () => {
         <h1 className="text-6xl md:text-8xl font-bold mb-8">ETHISTANBUL</h1>
 
         <div className="flex flex-col sm:flex-row gap-4 text-gray-800">
-          <LiquidButton className="border-none">Get Your Tickets</LiquidButton>
-          <LiquidButton className="border-none">Apply To Hack</LiquidButton>
+          <LiquidButton
+            className="border-none"
+            disabled={true}
+          >
+            Get Your Tickets
+          </LiquidButton>
+          <LiquidButton
+            className="border-none"
+            disabled={true}
+          >
+            Apply To Hack
+          </LiquidButton>
         </div>
       </div>
 

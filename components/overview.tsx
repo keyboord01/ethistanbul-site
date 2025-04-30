@@ -301,7 +301,10 @@ const Overview = () => {
                 className="w-[420px] h-[250px] object-cover"
               />
               <div className="absolute top-6 right-6">
-                <LiquidButton className="bg-green-200 text-green-900 px-6 pb-2 pt-1 border-1 border-black rounded-full flex items-center gap-2 hover:bg-green-300 transition-all cursor-pointer">
+                <LiquidButton
+                  disabled={true}
+                  className="bg-green-200 text-green-900 px-6 pb-2 pt-1 border-1 border-black rounded-full flex items-center gap-2 hover:bg-green-300 transition-all cursor-pointer"
+                >
                   Builders Week Istanbul
                   <svg
                     width="20"

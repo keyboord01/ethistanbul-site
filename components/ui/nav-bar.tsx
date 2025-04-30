@@ -74,20 +74,20 @@ const Navbar = ({ position }: { position?: string }) => {
           ? "/#overview"
           : "#overview",
     },
-    {
-      label: "Schedule",
-      href:
-        typeof window !== "undefined" && window.location.pathname !== "/"
-          ? "/#schedule"
-          : "#schedule",
-    },
-    {
-      label: "HackerKit",
-      href:
-        typeof window !== "undefined" && window.location.pathname !== "/"
-          ? "/#hacker-kit"
-          : "#hacker-kit",
-    },
+    // {
+    //   label: "Schedule",
+    //   href:
+    //     typeof window !== "undefined" && window.location.pathname !== "/"
+    //       ? "/#schedule"
+    //       : "#schedule",
+    // },
+    // {
+    //   label: "HackerKit",
+    //   href:
+    //     typeof window !== "undefined" && window.location.pathname !== "/"
+    //       ? "/#hacker-kit"
+    //       : "#hacker-kit",
+    // },
     {
       label: "Contributors",
       href:
@@ -95,27 +95,27 @@ const Navbar = ({ position }: { position?: string }) => {
           ? "/#contributors"
           : "#contributors",
     },
-    {
-      label: "Partners",
-      href:
-        typeof window !== "undefined" && window.location.pathname !== "/"
-          ? "/#partners"
-          : "#partners",
-    },
-    {
-      label: "Venue",
-      href:
-        typeof window !== "undefined" && window.location.pathname !== "/"
-          ? "/#venue"
-          : "#venue",
-    },
-    {
-      label: "Prizes",
-      href:
-        typeof window !== "undefined" && window.location.pathname !== "/"
-          ? "/#prizes"
-          : "#prizes",
-    },
+    // {
+    //   label: "Partners",
+    //   href:
+    //     typeof window !== "undefined" && window.location.pathname !== "/"
+    //       ? "/#partners"
+    //       : "#partners",
+    // },
+    // {
+    //   label: "Venue",
+    //   href:
+    //     typeof window !== "undefined" && window.location.pathname !== "/"
+    //       ? "/#venue"
+    //       : "#venue",
+    // },
+    // {
+    //   label: "Prizes",
+    //   href:
+    //     typeof window !== "undefined" && window.location.pathname !== "/"
+    //       ? "/#prizes"
+    //       : "#prizes",
+    // },
     {
       label: "FAQ",
       href:
