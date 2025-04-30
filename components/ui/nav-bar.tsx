@@ -161,9 +161,9 @@ const Navbar = ({ position }: { position?: string }) => {
               <motion.button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className={`px-4 py-2 rounded-full cursor-pointer ${
+                className={`px-4 pb-2 pt-1 rounded-full cursor-pointer ${
                   activeSection === link.href
-                    ? "bg-[#D1BAFF]"
+                    ? "bg-[#D1BAFF] border border-black"
                     : "hover:bg-purple-100"
                 }`}
                 animate={{
