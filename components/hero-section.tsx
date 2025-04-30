@@ -47,7 +47,9 @@ const HeroSection = () => {
         }}
       >
         <LiquidButton
-          disabled={true}
+          onClick={() => {
+            window.open("https://forms.gle/Vd69Fqpkvcv6VyEK8", "_blank");
+          }}
           className="text-gray-800 border border-black hover:bg-gray-100 px-5 pb-2 pt-1 rounded-full font-medium text-lg cursor-pointer"
         >
           Interested in partnering?
